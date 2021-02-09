@@ -1,12 +1,10 @@
-
-
 # 目录
 
 [toc]
 
 ## 基础语法
 
-### var 和 :=
+### 变量（var 和 :=）
 
 ```go
 
@@ -18,6 +16,44 @@ var number1, number2, number3 = 1, 2, 3
 
 //:= 再度简化。不过只能用在函数内部；在函数外部使用则会无法编译通过，所以一般用var方式来定义全局变量。
 number1, number2, number3 := 1, 2, 3
+```
+
+### 常量
+
+```go
+    const name = "ok"  隐式类型定义
+    const name1 string= "ok"  显式类型定义
+```
+
+建议将常量或者log等常用接口整合到项目的constDefine.go里进行统一管理：
+
+```go
+import (
+	"runtime"
+
+	log "github.com/cihub/seelog"
+)
+
+const{
+   URL = "http://test"
+   FLAG = 1
+}
+
+func LogError(a ...interface{}) {
+	_, file, line, _ := runtime.Caller(1)
+	log.Error(file, ":", line, a)
+}
+
+func LogInfo(a ...interface{}) {
+	_, file, line, _ := runtime.Caller(1)
+	log.Info(file, ":", line, a)
+}
+
+func LogDebug(a ...interface{}) {
+	_, file, line, _ := runtime.Caller(1)
+	log.Debug(file, ":", line, a)
+}
+
 ```
 
 
@@ -145,7 +181,7 @@ func cmpMap(m1, m2 map[string]int) bool {
 
 
 
-### struct
+### struct 结构体
 
 数组只能存放单一的数据类型，可以将不同类型的数据存放到struct。在GO中没有class的关键字，但GO是通过struct结构与method方法组合来实现的面向对象。
 
@@ -165,6 +201,18 @@ func main() {
 }
 
 ```
+
+```go
+type user struct {
+  name string
+  age byte
+}
+ 
+//属性名称都可以省略，会按声明时的字段顺序初始化
+user := user {"Tom", 2}
+```
+
+
 
 ```go
 //struct 作为一种类型和其他类型结合用
@@ -189,11 +237,78 @@ func (p *Person) list() {
 }
 ```
 
+### 匿名结构体
+
+```go
+/*
+     匿名结构体和匿名字段
+        匿名结构体：没有名字的结构体，在创建匿名结构体时。同时创建对象
+              变量名:=struct {
+                  定义字段
+              }{
+                  字段进行赋值
+              }
+
+        匿名字段： 一个结构体的字段没有名字
+              理解为 如果一个字段没有名字。 那么默认使用类型作为字段名
+
+   匿名函数：没有名字的函数，随着定义的时候直接调用
+
+*/
+
+func TestAdd(t *testing.T) {
+
+	// 定义匿名结构体。同时创建该匿名结构体的对象
+	p1 := struct {
+		name string
+		age  int
+	}{
+		name: "zhangsan",
+		age:  34,
+	}
+	t.Log(p1)
+
+	p := struct {
+		string
+		int
+	}{
+		"张三",
+		12,
+	}
+
+	t.Log(p)
+}
+
+```
+
 
 
 ### 匿名字段
 
 定义一个struct，定义的时候是字段名与其类型一一对应，实际上Go语言支持只提供类型，而不写字段名的方式，也就是匿名字段，或称为嵌入字段。
+
+```go
+type Person struct {
+	Name string
+	Age  int
+}
+
+type China struct {
+	Person
+	string
+}
+
+func main() {
+	p := Person{Name: "aa", Age: 22}
+	c := China{Person: p, string: "中国"}
+	fmt.Println(c)   //{{aa 22} 中国}
+	fmt.Println(c.Person.Age)  //22
+    fmt.Println(c.Age)  //22  (可以继承)
+}
+
+```
+
+
 
 ### OK 断言
 
@@ -220,6 +335,34 @@ ok即断言，可以断言某一个变量是特定类型，也可以断言map中
 ```
 
 ### 逗号OK 模式
+
+### Lable
+
+#### goto
+
+```go
+func TestAdd1(t *testing.T) {
+	fmt.Println(1)
+	goto End
+	fmt.Println(2)
+End:
+	fmt.Println(3)
+}
+
+//Output:
+1
+3
+```
+
+```go
+// Label可以声明在函数体的任何地方
+// 下面是一个死循环
+func TestAdd1(t *testing.T) {
+End:
+	fmt.Println(1)
+	goto End
+}
+```
 
 
 

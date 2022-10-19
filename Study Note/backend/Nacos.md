@@ -60,12 +60,6 @@ http://118.24.221.85:8848/nacos
 
 
 
-![](http://markdown.wangyingbo.site/20201230101921.png)
-
-
-
-
-
 ### 版本对应
 
 <table role="table">

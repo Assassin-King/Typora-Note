@@ -1,0 +1,13 @@
+# Typora 
+
+
+
+[toc]
+
+## 破解（V1.3.8）
+
+1. 先安装 typora-setup-x64-1.3.8.exe ，记下安装路径, 默认是 `C:\Program Files\Typora`
+2. 将 `winmm.dll` 替换到安装路径下含有typora.exe的文件夹中
+3. 重启typora，即可激活
+4. 有条件请支持正版
+5. Resource 目录已备份exe 和dll 文件

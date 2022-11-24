@@ -161,3 +161,66 @@ Spring Web【Web模块】：提供了基础的针对Web开发的集成特性。
 
 Spring MVC【MVC模块】：提供了Web应用的MVC实现。Spring的MVC框架并不是仅仅提供一种传统的实现，它提供了一种清晰的分离模型。
 ```
+
+
+
+## 异常
+
+![image-20221107153637865](https://raw.githubusercontent.com/Assassin-King/Typora-Note/master/Images/markdown/image-20221107153637865.png)
+
+
+
+### catch 中 return 了，finally 还会执行吗？
+
+**finally中，如果没有return，而catch中有return，则return的值在catch中就已经确认，随后执行的finally，无论发生什么，只要没有return，就不会改变最终输出的结果。**
+
+```java
+public class a{
+public static void main(String[] args){
+     System.out.println(gi());
+}
+public static int gi(){
+   int b=10;
+   try{
+     System.out.println(b/0);
+     b=99;
+   }
+   catch(ArithmeticException e){
+      b=66；
+      return b;
+   }finally{
+      b=20;
+     //return b;
+   }
+}
+}
+```
+
+catch： **b=66** --->   **return b=return 66**  --->   **finally：b=20**  ---> **结束程序**
+
+如果把注释里面的 **return b**也放出来， 具体执行步骤变为：
+
+catch： **b=66**  --->   **return b=return 66**  --->   **finally：b=20  retun b=return 20**  ---> **结束程序**
+
+
+
+### try-with-source
+
+如果你的资源实现了 `AutoCloseable` 接口，你可以使用这个语法。大多数的 Java 标准资源都继承
+了这个接口。当你在 try 子句中打开资源，资源会在 try 代码块执行后或异常处理后自动关闭。
+
+```java
+	public void automaticallyCloseResource() {
+		File file = new File("./tmp.txt");
+		try (FileInputStream inputStream = new FileInputStream(file);) {
+			// use the inputStream to read a file
+		} catch (FileNotFoundException e) {
+			log.error(e);
+		} catch (IOException e) {
+			log.error(e);
+		}
+	}
+
+
+```
+

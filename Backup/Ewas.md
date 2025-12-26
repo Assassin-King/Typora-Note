@@ -12,16 +12,6 @@
 10.11.104.137   stg
 ```
 
-
-
-## Ewas 压测环境
-
-
-
-
-
-
-
 ## tenant服务走跳板机快速部署
 
 ```
@@ -38,5 +28,17 @@ cp  /home/safetysuite/data/cluster/bbtest/rtm-tenant-http-0.0.1-SNAPSHOT-exec.ja
 
 #重启tenant
 sudo service ss-app_tenant  restart
+
+#拷贝stg的前端资源到qa 
+scp ewas.zip   safetysuite@10.11.104.135:/home/safetysuite/data/frontend
 ```
 
+
+
+
+
+## Ewas 压测环境
+
+https://ss-stress.honeywell.com/api  
+
+![image-20251226140238176](https://raw.githubusercontent.com/Assassin-King/Typora-Note/master/Images/markdown/image-20251226140238176.png)

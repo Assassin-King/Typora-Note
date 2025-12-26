@@ -4,23 +4,29 @@
 
 [toc]
 
-## 破解（V1.3.8）
+## yml 配置  支持PicGo
 
-1. 先安装 typora-setup-x64-1.3.8.exe ，记下安装路径, 默认是 `C:\Program Files\Typora`
+路径 `C:\Users\H433899\AppData\Roaming\Typora\typora.yml` ，默认调用PicGo 的server 模式
 
-2. 将 `winmm.dll` 替换到安装路径下含有typora.exe的文件夹中
+```
+image:
+  upload: true
+  service: picgo-server
+  picgo-server:
+    url: "http://127.0.0.1:36677/upload"
+```
 
-3. 重启typora，即可激活
 
-4. 有条件请支持正版
 
-5. Resource 目录已备份exe 和dll 文件
+![image-20251226135216161](https://raw.githubusercontent.com/Assassin-King/Typora-Note/master/Images/markdown/image-20251226135216161.png)
 
-   
 
-   
 
-##  主题
+Typora 里可以设置图片自动上传：
+
+![image-20251226135433885](https://raw.githubusercontent.com/Assassin-King/Typora-Note/master/Images/markdown/image-20251226135433885.png)
+
+##  主题推荐
 
 主题下载官网地址： **https://theme.typora.io/** ， 强推 `VUE 主题风格`，非常舒服。
 
@@ -28,3 +34,8 @@
 
 
 
+##  重要配置项！！！
+
+注意开启切换文件时自动保存！！！
+
+![image-20251226135723758](https://raw.githubusercontent.com/Assassin-King/Typora-Note/master/Images/markdown/image-20251226135723758.png)
